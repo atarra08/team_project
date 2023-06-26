@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <title>All users</title>
+    <link rel="icon" href="/assets/photo_2023-06-21_23-42-31.jpg">
+
+
+</head>
+
+<body>
+    <div id="navbar" style="width: 100%;"></div>
+    <div id="parent_block">
+
+    </div>
+    <div id="footer" style="width: 100%;"></div>
+</body>
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Arial', ‘sans-serif’;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        justify-content: center;
+        align-items: center;
+        background: hsl(187 40% 98%);
+    }
+
+
+    h2 {
+        margin: 0;
+        font-size: 1.4rem;
+    }
+
+    @media (min-width: 50em) {
+        h2 {
+            font-size: 1.8rem;
+        }
+    }
+
+    .cta {
+        --shadowColor: 187 60% 40%;
+        display: flex;
+        flex-wrap: wrap;
+        background: hsl(187 70% 85%);
+        max-width: 50rem;
+        width: 100%;
+        box-shadow: 0.65rem 0.65rem 0 hsl(var(--shadowColor) / 1);
+        border-radius: 0.8rem;
+        overflow: hidden;
+        border: 0.5rem solid;
+    }
+
+    .cta img {
+        aspect-ratio: 3 / 2;
+        object-fit: cover;
+        flex: 1 1 300px;
+        outline: 0.5rem solid;
+    }
+
+    .cta__text-column {
+        padding: min(2rem, 5vw) min(2rem, 5vw) min(2.5rem, 5vw);
+        flex: 1 0 50%;
+    }
+
+    .cta__text-column>*+* {
+        margin: min(1.5rem, 2.5vw) 0 0 0;
+    }
+
+    .cta a {
+        display: inline-block;
+        color: black;
+        padding: 0.5rem 1rem;
+        text-decoration: none;
+        background: hsl(187 75% 64%);
+        border-radius: 0.6rem;
+        font-weight: 700;
+        border: 0.35rem solid;
+    }
+</style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(() => {
+        $("#navbar").load("./Navigation-bar.html");
+        $("#footer").load("./Footer.html")
+        const keys = Object.keys(localStorage)
+        console.log(keys)
+
+        keys.forEach(key => {
+            const user = JSON.parse(localStorage.getItem(key));
+            console.log(user);
+
+            let article = $('<article class="cta"></article>');
+            let userImage = $(`<img src="${user.imageLink}" alt="Image">`);
+            let details = $('<div class="cta__text-column"></div>');
+            let userFullName = $(`<h2>${user.fullname}</h2>`);
+            let userEmail = $(`<p>${user.email}</p>`);
+            let userProfile = $(`<a href="/Profile.html?id=${user.id}">Profile</a>`);
+
+            details.append(userFullName, userEmail, userProfile);
+            article.append(userImage, details);
+            $('#parent_block').append(article);
+        });
+
+    })
+</script>
+
+</html>

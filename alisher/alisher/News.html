@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News</title>
+    <link rel="icon" href="/assets/photo_2023-06-21_23-42-31.jpg">
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+</head>
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        max-width: 1440px;
+        margin: auto;
+    }
+
+    .slider-wrapper {
+        margin: 1rem;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .slides-container {
+        height: calc(100vh - 2rem);
+        width: 100%;
+        display: flex;
+        overflow: scroll;
+        scroll-behavior: smooth;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .slide-arrow {
+        position: absolute;
+        display: flex;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        height: 4rem;
+        background-color: white;
+        border: none;
+        width: 2rem;
+        font-size: 3rem;
+        padding: 0;
+        cursor: pointer;
+        opacity: 0.5;
+        transition: opacity 100ms;
+    }
+
+    .slide-arrow:hover,
+    .slide-arrow:focus {
+        opacity: 1;
+    }
+
+    #slide-arrow-prev {
+        left: 0;
+        padding-left: 0.25rem;
+        border-radius: 0 2rem 2rem 0;
+    }
+
+    #slide-arrow-next {
+        right: 0;
+        padding-left: 0.75rem;
+        border-radius: 2rem 0 0 2rem;
+    }
+
+    .slide {
+        width: 100%;
+        height: 100%;
+        flex: 1 0 100%;
+    }
+
+    .slider-image {
+        width: 100%;
+        height: 100%;
+    }
+
+    footer {
+        padding: 1em;
+        text-align: center;
+        background-color: #FFDFB9;
+    }
+
+    footer a {
+        color: inherit;
+        text-decoration: none;
+    }
+
+    footer .heart {
+        color: #DC143C;
+    }
+
+    figcaption {
+        font-style: italic;
+        margin-top: 10px;
+        font-family: 'Arial', ‘sans-serif’;
+        color: #555;
+    }
+</style>
+
+<body>
+    <div id="navbar"></div>
+    <section class="slider-wrapper">
+        <button class="slide-arrow" id="slide-arrow-prev">
+            &#8249;
+        </button>
+        <button class="slide-arrow" id="slide-arrow-next">
+            &#8250;
+        </button>
+        <ul class="slides-container" id="slides-container">
+            <li class="slide">
+                <img class="slider-image" src="/assets/images/photo_1_2023-06-20_23-41-16.jpg" alt="">
+            </li>
+            <li class="slide">
+                <img class="slider-image" src="/assets/images/photo_2_2023-06-20_23-41-16.jpg" alt="">
+            </li>
+            <li class="slide">
+                <img class="slider-image" src="/assets/images/photo_3_2023-06-20_23-41-16.jpg" alt="">
+            </li>
+            <li class="slide">
+                <img class="slider-image" src="/assets/images/photo_4_2023-06-20_23-41-16.jpg" alt="">
+            </li>
+            <li class="slide">
+                <img class="slider-image" src="/assets/images/photo_5_2023-06-20_23-41-16.jpg" alt="">
+            </li>
+            <li class="slide">
+                <img class="slider-image" src="/assets/images/photo_6_2023-06-20_23-41-16.jpg" alt="">
+            </li>
+            <li class="slide">
+                <img class="slider-image" src="/assets/images/photo_7_2023-06-20_23-41-16.jpg" alt="">
+            </li>
+            <li class="slide">
+                <img class="slider-image" src="/assets/images/photo_8_2023-06-20_23-41-16.jpg" alt="">
+            </li>
+            <li class="slide">
+                <img class="slider-image" src="/assets/images/photo_9_2023-06-20_23-41-16.jpg" alt="">
+            </li>
+            <li class="slide">
+                <img class="slider-image" src="/assets/images/photo_10_2023-06-20_23-41-16.jpg" alt="">
+            </li>
+            <li class="slide">
+                <img class="slider-image" src="/assets/images/photo_11_2023-06-20_23-41-16.jpg" alt="">
+            </li>
+            <li class="slide">
+                <img class="slider-image" src="/assets/images/photo_12_2023-06-20_23-41-16.jpg" alt="">
+            </li>
+        </ul>
+    </section>
+    <figcaption>
+        Kazakhstan's nature is a testament to the resilience and grandeur of our planet. From the snow-capped peaks to
+        the rolling grasslands, it is a land where harmony thrives between the untamed and the serene. Exploring its
+        treasures evokes a profound appreciation for the delicate balance of nature and reminds us of the irreplaceable
+        beauty that must be cherished and preserved for generations to come.
+    </figcaption>
+    <div id="footer"></div>
+</body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+
+    const slidesContainer = document.getElementById("slides-container");
+    const slide = document.querySelector(".slide");
+    const prevButton = document.getElementById("slide-arrow-prev");
+    const nextButton = document.getElementById("slide-arrow-next");
+    const next = () => {
+        const slideWidth = slide.clientWidth;
+        slidesContainer.scrollLeft += slideWidth;
+    }
+
+    const previos = () => {
+        const slideWidth = slide.clientWidth;
+        slidesContainer.scrollLeft -= slideWidth;
+    }
+    nextButton.addEventListener("click", next);
+
+    prevButton.addEventListener("click", previos);
+
+    document.addEventListener('DOMContentLoaded', () => {
+        document.body.addEventListener('keypress', (e) => {
+            if (e.code === 'Space') {
+                next()
+            }
+        });
+    });
+
+
+    $(document).ready(() => {
+        console.log('document readed')
+        $("#navbar").load("./Navigation-bar.html");
+        $("#footer").load("./Footer.html")
+    })
+</script>
+
+</html>
